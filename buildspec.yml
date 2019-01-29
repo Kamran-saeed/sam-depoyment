@@ -2,10 +2,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file template.yml --s3-bucket layer-test-lamda 
-                                   --output-template-file outputSamTemplate.yaml
+      - pip install --user aws-sam-cli
+      - sam package --template-file template.yml --s3-bucket layer-test-lamda --output-template-file package.yaml
 artifacts:
-  type: zip
   files:
-    - template.yml
-    - outputSamTemplate.yaml
+    - '**/*'
