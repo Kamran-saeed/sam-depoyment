@@ -2,7 +2,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - npm install time
       - aws cloudformation package --template-file template.yml --s3-bucket layer-test-lamda 
                                    --output-template-file outputSamTemplate.yaml
 artifacts:
