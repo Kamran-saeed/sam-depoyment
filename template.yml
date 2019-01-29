@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: A starter AWS Lambda function.
+
+Resources:
+  Lambdalayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: ExpressNodeJs
+      Description: NodeJs Layer
+      ContentUri: 's3://layer-test-lamda/package.zip'
+      CompatibleRuntimes:
+        - nodejs6.10
+        - nodejs8.10
+      LicenseInfo: 'Available under the MIT-0 license.'
+      RetentionPolicy: Retain
+      
+  helloworld:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: app.handler
+      Runtime: nodejs6.10
+      CodeUri: ./
+      Description: A starter AWS Lambda function.
+      MemorySize: 128
+      Timeout: 3
+      Layers:
+        - !Ref Lambdalayer
+      Policies:
+        - AWSLambdaExecute
